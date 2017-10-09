@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="">
+    <title>Admin | 8 Ball Pool</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Menu CSS -->
+    <link href="../plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
+    <!-- animation CSS -->
+    <link href="css/animate.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+    <!-- color CSS -->
+    <link href="css/colors/default.css" id="theme" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBufoTjjlnhdpjUfGY_TRM7pqhE4ZNvir4",
+            authDomain: "ballpool-d1979.firebaseapp.com",
+            databaseURL: "https://ballpool-d1979.firebaseio.com",
+            projectId: "ballpool-d1979",
+            storageBucket: "ballpool-d1979.appspot.com",
+            messagingSenderId: "116075324547"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <script>
+            // $(document).ready(function () {
+            //     update();
+            // });
+            var ck = location.search.split('child_key=')[1];
+            // function update() {
+            //     firebase.database().ref('/tournaments/' + ck).once('value').then(function (snapshot) {
+
+            //         document.getElementById("tournament_name").value = snapshot.val().tournament_name;
+            //         document.getElementById("tournament_datetime").value = snapshot.val().tournament_datetime;
+            //         document.getElementById("location").value = snapshot.val().location;
+            //         document.getElementById("description").value = snapshot.val().tournament_description;
+
+            //     })
+            // }
+            function setUserData() {
+                if (confirm('Are you sure?')) {
+                    var tournament_name = document.getElementById("tournament_name").value;
+                    var location = document.getElementById("location").value;
+                    var tournament_datetime = document.getElementById("tournament_datetime").value;
+                    var tournament_description = document.getElementById("description").value;
+                    var prize_amount = document.getElementById("prize_amount").value;
+                    var entry_fee = document.getElementById("entry_fee").value;
+                    if (tournament_name == "" & location == "" & tournament_datetime == "") {
+                        alert("fill blank field");
+                    } else {
+
+                        firebase.database().ref('tournaments/' + ck).update({
+                            tournament_name: tournament_name,
+                            location: location,
+                            tournament_datetime: tournament_datetime,
+                            tournament_description: tournament_description,
+                            prize_amount:prize_amount,
+                            entry_fee:entry_fee
+                        });
+                        alert("Successfully Updated");
+
+                        //window.location = "tournamentview.html";
+                    }
+                }
+            }
+    </script>
+</head>
+
+<body class="fix-header" ng-app="8ballpoolApp">
+    <div ng-include="'header.htm'"></div>
+    <!-- ============================================================== -->
+    <!-- Page Content -->
+    <!-- ============================================================== -->
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row bg-title">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                    <h4 class="page-title">Edit Tournament</h4>
+                </div>
+                <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+                    <a class="btn btn-success pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light" href="tournamentinsert.html">Add New Tournament</a>
+                    <ol class="breadcrumb">
+                        <li><a href="#">Dashboard</a></li>
+                        <li class="active">Tournaments</li>
+                    </ol>
+
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /row -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="white-box">
+                        <h3 class="box-title">Edit Tournament</h3>
+                        <form class="form-horizontal form-material" ng-controller="ctrl">
+                            <div class="form-group">
+                                <label class="col-md-12">Tournament Name</label>
+                                <div class="col-md-12">
+                                    <input type="text" id="tournament_name" class="form-control form-control-line" value="{{tournament.tournament_name}}" name="tournament_name" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="tournament_datetime" class="col-md-12">Date/Time</label>
+                                <div class="col-md-12">
+                                    <input type="date" id="tournament_datetime" name="tournament_datetime" value="{{tournament.tournament_datetime}}" class="form-control form-control-line" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12">Location</label>
+                                <div class="col-md-12">
+                                    <input type="text" id="location" name="location" value="{{tournament.location}}" class="form-control form-control-line" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12">Description</label>
+                                <div class="col-md-12">
+                                    <textarea id="description" name="description" class="form-control form-control-line" required cols="30" rows="10">{{tournament.tournament_description}}</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12">Prize Money</label>
+                                <div class="col-md-12">
+                                    <input type="number" id="prize_amount" name="prize_amount" value="{{tournament.prize_amount}}" class="form-control form-control-line" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12">Entry Fees</label>
+                                <div class="col-md-12">
+                                    <input type="number" id="entry_fee" name="entry_fee" value="{{tournament.entry_fee}}" class="form-control form-control-line" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <button class="btn btn-success" onclick="setUserData()">Update</button>
+                                </div>
+                            </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+            <footer class="footer text-center">© 2017 8 Ball Pool . All Rights Reserved | Powered by <a href="http://cdtfx.com/">CDTFX</a></footer>
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="../plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="../plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+    <!--slimscroll JavaScript -->
+    <script src="js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="js/waves.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="js/custom.min.js"></script>
+
+    <script>
+            // define our app and dependencies (remember to include firebase!)
+
+
+            var app = angular.module("8ballpoolApp", ["firebase"]);
+            var ck = location.search.split('child_key=')[1];
+
+            app.controller("ctrl", function ($scope, $firebaseArray) {
+                var ref = new Firebase("https://ballpool-d1979.firebaseio.com/tournaments");
+                // create a synchronized array
+                // click on `index.html` above to see it used in the DOM!
+                var tournaments = $firebaseArray(ref);
+
+
+                tournaments.$ref().orderByKey().equalTo(ck).on("child_added", function (dataSnapshot) {
+                    var tournament = dataSnapshot.val();
+                    if (dataSnapshot.exists()) {
+                        console.log("Found", tournament);
+                        $scope.tournament = tournament;
+                    } else {
+                        alert("no");
+                        console.warn("Not found.");
+                    }
+                });
+            });
+    </script>
+</body>

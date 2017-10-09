@@ -1,0 +1,57 @@
+<html>
+
+<head>
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-messaging.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-storage.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyBufoTjjlnhdpjUfGY_TRM7pqhE4ZNvir4",
+      authDomain: "ballpool-d1979.firebaseapp.com",
+      databaseURL: "https://ballpool-d1979.firebaseio.com",
+      projectId: "ballpool-d1979",
+      storageBucket: "ballpool-d1979.appspot.com",
+      messagingSenderId: "116075324547"
+    };
+    firebase.initializeApp(config);
+  </script>
+</head>
+
+<body>
+  <div id="tournament_name"></div>
+  <div id="tournament_desc"></div>
+  
+ 
+</body>
+
+
+<script>
+        $(document).ready(function () {  //function call
+          home_load();     //function defined
+        });
+        function home_load() {
+
+          var tournament_ref = firebase.database().ref("tournaments/");
+          tournament_ref.limitToLast(1).on("child_added", function (tournament_snapshot) {
+            var tournamentdata = tournament_snapshot.val();
+
+            document.getElementById("tournament_name").innerHTML = tournamentdata.tournament_name;
+            document.getElementById("tournament_desc").innerHTML = tournamentdata.tournament_description;
+
+            alert("yes");
+
+          });
+        }
+
+</script>
+
+
+</html>

@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="eng">
+
+<head>
+    <title>Home</title>
+    <!-- Meta tag Keywords -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <!-- css files -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <!-- Bootstrap-Core-CSS -->
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
+    <!-- Style-CSS -->
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <!-- Font-Awesome-Icons-CSS -->
+    <link rel="stylesheet" href="css/owl.carousel.css" type="text/css" media="all" />
+    <!-- Owl-Carousel-CSS -->
+    <link rel="stylesheet" href="css/easy-responsive-tabs.css">
+    <!-- tabs-css -->
+    <link rel="stylesheet" href="css/monthly.css">
+    <!-- Calender-CSS -->
+    <link href="css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+	 <link href="css/animate.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- pop-up-box -->
+    <link rel="stylesheet" href="~/css/jquery.fadeshow-0.1.1.css" />
+    <!-- //css files -->
+    <link rel="stylesheet" id="redux-google-fonts-visual_options-css" href="http://fonts.googleapis.com/css?family=Roboto+Condensed%3A400%7COpen+Sans%3A400%7CMuli&amp;subset=latin&amp;ver=4.8.1" type="text/css" media="all">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i&amp;subset=latin-ext" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i&amp;subset=latin-ext,vietnamese" rel="stylesheet">
+    <!-- firebase -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-messaging.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-storage.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBufoTjjlnhdpjUfGY_TRM7pqhE4ZNvir4",
+            authDomain: "ballpool-d1979.firebaseapp.com",
+            databaseURL: "https://ballpool-d1979.firebaseio.com",
+            projectId: "ballpool-d1979",
+            storageBucket: "ballpool-d1979.appspot.com",
+            messagingSenderId: "116075324547"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <script type="text/javascript" src="./js/common.js"></script>
+
+</head>
+
+<body>
+    <div id="header"></div>
+    <div class="callbacks_container">
+      <div class="background"></div>
+        <div class="w3layouts-banner-top">
+            <div class="agileits-banner-info">
+                <h3 id="tournamentname">Find Your Next Challenge</h3>
+                <p id="tournamentdescription">Compete for Glory and Prizes in the Best 8 Ball Pool Tournaments</p>
+                <div id="my" class="w3-button">
+                    <a href="#expressinterestmodal" id="expressinterest" class="link-w3l1" data-toggle="modal">Express Interest</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="expressinterestmodal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title text-left">LOGO</h4>
+                    </div>
+                    <div class="modal-body text-center">
+
+                        <div class="col-md-12">
+                            <div class="modal-header">
+                                <h4 class="modal-title">SIGN UP</h4>
+                            </div>
+                            <div class="agileits_signin_form">
+                                <input id="prefered_location" type="text" name="prefered_location" placeholder="Preferred Location" required="">
+                                <select id="prefered_day" name="prefered_day" required>
+												<option value="sunday">sunday</option>
+											  <option value="monday">monday</option>
+											  <option value="tuesday">tuesday</option>
+											  <option value="wednessday">wednessday</option>
+											  <option value="thursday">thursday</option>
+											  <option value="friday">friday</option>
+											  <option value="saturday">saturday</option>
+											  </select>
+
+                                <input id="interest" type="submit" value="Express Interest" onclick="express_interest()">
+
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="w3agile_social_icons">
+                            <ul>
+                                <li class="wthree_follow">Or Sign Up with :</li>
+                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- //modal-content -->
+            </div>
+            <!-- //modal-dialog -->
+        </div>
+        <div class="modal fade" id="booknow" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title text-left">LOGO</h4>
+                    </div>
+                    <div class="modal-body text-center">
+
+                        <div class="col-md-12">
+                            <div class="modal-header">
+                                <h4 class="modal-title">BOOK NOW</h4>
+                            </div>
+                            <div class="agileits_signin_form" >
+                                <div style="align-content: center;text-align:center;">
+                                        <h2 class="modal-title">PAY 20%</h2>
+                                        <input id="partialpay" type="submit" value="{{paypartial}}" onclick="express_interest()">
+                                </div>
+                                <div style="margin-top:5%;align-content: center;text-align:center;">
+                                        <h2 class="modal-title">PAY FULL</h2>
+                                        <input id="fullpay" type="submit" value="{{payfull}}" onclick="express_interest()">
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="w3agile_social_icons">
+                            <ul>
+                                <li class="wthree_follow">Or Sign Up with :</li>
+                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- //modal-content -->
+            </div>
+            <!-- //modal-dialog -->
+        </div>
+        <!-- //modal -->
+
+    </div>
+    <div class="clearfix"> </div>
+    <div class="container full-width clearfix">
+	<div data-wow-duration="0.25s" class="col-md-4 wow fadeIn">
+		<img src="images/2.jpg" />
+	</div>
+	<div data-wow-duration="0.25s" class="col-md-6 col-md-offset-2 wow fadeIn">
+        <h1 class="w3l-title">About Us<span>About Us<span></h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc haec primum fortasse audientis servire debemus. Si enim ita est, vide ne facinus facias, cum mori suadeas. Quis non odit sordidos, vanos, leves, futtiles? Qui ita affectus, beatum esse
+            numquam probabis; Et quidem, inquit, vehementer errat; Ab his oratores, ab his imperatores ac rerum publicarum principes extiterunt.
+        </p>
+        </div>
+
+    </div>
+    <!-- main-content -->
+    <div class="w3l-main">
+	<svg class="uvc-tilt-right-seperator" xmlns="http://www.w3.org/2000/svg" version="1.1" fill="#fff" width="100%" viewBox="0 0 4 0.266661" preserveAspectRatio="none" >
+	<polygon class="fil0" points="4,0 4,0.266661 -0,0.266661 "></polygon>
+	</svg>
+        <h1 data-wow-duration="0.15s" class="w3l-title wow fadeIn">Past Tournaments</h1>
+
+        <!-- sec-section -->
+        <div class="clearfix"></div>
+        <!-- //sec-section -->
+        <!-- third-section -->
+        <div class="w3agile-spldishes">
+            <div class="spldishes-agileinfo">
+                <div class="spldishes-grids">
+                    <!-- Owl-Carousel -->
+
+
+                    <div id="pastgames" class="text-center agileinfo-gallery-row clearfix ">
+
+
+
+                    </div>
+                </div>
+                <div class="clearfix"> </div>
+                <!-- <div class="w3-button text-center">
+                    <a href="#" class="link-w3l1">View More</a>
+                </div> -->
+            </div>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+    <!-- <div class="kode-newslatter kode-bg-color">
+        <span class="kode-halfbg thbg-color"></span>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Subscribe Our Monthly Newsletter</h3>
+                </div>
+                <div class="col-md-6">
+                    <form>
+                        <input class="form-control" type="text" placeholder="Your E-mail Adress" name="s" required="">
+                        <label><input type="submit" value=""></label>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- //main-content -->
+    <!-- copyright -->
+    <div class="clearfix"></div>
+    <div class="footer-agileits-w3layouts clearfix">
+
+        <!--<div class="social text-center">
+		<ul class="cs-social">
+    <li class="facebook"><a target="_blank" href="#"><i class="fa fa-facebook"></i></a></li>
+    <li class="twitter"><a target="_blank" href="#"><i class="fa fa-twitter"></i></a></li>
+    <li class="linkedin"><a target="_blank" href="#"><i class="fa fa-linkedin"></i></a></li>
+    <li class="youtube"><a target="_blank" href="#"><i class="fa fa-youtube-play"></i></a></li>
+</ul>
+	</div>-->
+        <div class="col-md-12 text-center">
+            <p class="agileinfo"> &copy; 2017 8 Ball Pool . All Rights Reserved | Powered by <a href="http://syonindia.com">SIASPL</a></p>
+        </div>
+
+        <a class="thbg-colortwo" id="top" href="#"><i class="fa fa-angle-up"></i></a>
+
+    </div>
+
+    <!-- //copyright -->
+
+    <!-- js-scripts -->
+    <!-- js -->
+    <!-- <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script> -->
+    <!-- //js -->
+    <!-- smooth scrolling -->
+    <!--<script src="js/SmoothScroll.min.js"></script>-->
+    <!-- //smooth scrolling -->
+    <!-- menu-script -->
+    <script>
+function openNav() {
+    document.getElementById("myNav").style.height = "100%";
+}
+
+function closeNav() {
+    document.getElementById("myNav").style.height = "0%";
+}
+
+</script>
+<script>
+$(window).on("scroll", function() {
+  if($(window).scrollTop() > 50) {
+      $("#navbar").addClass("active");
+  } else {
+      //remove the background property so it comes transparent again (defined in your css)
+     $("#navbar").removeClass("active");
+  }
+});
+</script>
+    <script>
+        $(document).ready(function() {
+
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 100) {
+                    $('#top').fadeIn();
+                } else {
+                    $('#top').fadeOut();
+                }
+            });
+
+            $('#top').click(function() {
+                $("html, body").animate({
+                    scrollTop: 0
+                }, 600);
+                return false;
+            });
+
+        });
+    </script>
+    <script>
+        $("span.menu").click(function() {
+            $(".nav1 ul").slideToggle(500, function() {});
+        });
+    </script>
+    <!-- //menu-script -->
+    <!--skycons-icons-->
+
+    <!--//skycons-icons-->
+    <script src="js/SmoothScroll.min.js"></script>
+    <!--banner Slider starts Here-->
+    <script src="js/responsiveslides.min.js"></script>
+
+    <!--banner Slider ends Here-->
+    <!--weather-->
+
+
+    <!--//weather-->
+    <!-- video pg plugin -->
+    <script src="js/jquery.vide.min.js"></script>
+    <!-- //video pg plugin -->
+    <!-- //bars -->
+    <script src="js/bars.js"></script>
+    <!-- bars -->
+    <!-- Owl-Carousel-JavaScript -->
+    <script src="js/owl.carousel.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#owl-demo").owlCarousel({
+                items: 4,
+                lazyLoad: true,
+                autoPlay: true,
+                pagination: true,
+            });
+        });
+    </script>
+    <!-- //Owl-Carousel-JavaScript -->
+    <!-- responsive-tabs -->
+    <script src="js/easy-responsive-tabs.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#verticalTab').easyResponsiveTabs({
+                type: 'vertical',
+                width: 'auto',
+                fit: true
+            });
+        });
+    </script>
+    <!-- //responsive-tabs -->
+    <!-- Popup-js -->
+    <script src="js/jquery.magnific-popup.js" type="text/javascript"></script>
+    <script>
+        $(document).ready(function() {
+            $('.popup-with-zoom-anim').magnificPopup({
+                type: 'inline',
+                fixedContentPos: false,
+                fixedBgPos: true,
+                overflowY: 'auto',
+                closeBtnInside: true,
+                preloader: false,
+                midClick: true,
+                removalDelay: 300,
+                mainClass: 'my-mfp-zoom-in'
+            });
+
+        });
+    </script>
+    <!-- //Popup-js -->
+    <!-- stats -->
+
+
+    <!-- Counter required files -->
+    <link rel='stylesheet' href='css/dscountdown.css' type='text/css' media='all' />
+    <script type="text/javascript" src="js/dscountdown.min.js"></script>
+    <script>
+        jQuery(document).ready(function($) {
+            $('.demo2').dsCountDown({
+                endDate: new Date("December 24, 2020 23:59:00"),
+                theme: 'black'
+            });
+        });
+    </script>
+    <!-- //Counter required files -->
+    <!-- Necessary-JavaScript-File-For-Bootstrap -->
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <!-- //Necessary-JavaScript-File-For-Bootstrap -->
+    <script>
+        // Hide Header on on scroll down
+        var didScroll;
+        var lastScrollTop = 0;
+        var delta = 5;
+        var navbarHeight = $('header').outerHeight();
+
+        $(window).scroll(function(event) {
+            didScroll = true;
+        });
+
+        setInterval(function() {
+            if (didScroll) {
+                hasScrolled();
+                didScroll = false;
+            }
+        }, 250);
+
+        function hasScrolled() {
+            var st = $(this).scrollTop();
+
+            // Make sure they scroll more than delta
+            if (Math.abs(lastScrollTop - st) <= delta)
+                return;
+
+            // If they scrolled down and are past the navbar, add class .nav-up.
+            // This is necessary so you never see what is "behind" the navbar.
+            if (st > lastScrollTop && st > navbarHeight) {
+                // Scroll Down
+                $('header').removeClass('nav-down').addClass('nav-up');
+            } else {
+                // Scroll Up
+                if (st + $(window).height() < $(document).height()) {
+                    $('header').removeClass('nav-up').addClass('nav-down');
+                }
+            }
+
+            lastScrollTop = st;
+        }
+    </script>
+    <!-- //js-scripts -->
+
+    <script>
+        //Firebase Script start
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        $(document).ready(function() {
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    headerauth_load();
+                } else {
+                    header_load();
+                }
+            });
+            footer_load();
+            checkUser();
+            //get key of json
+            ///////////////////////////////////////////////////////////////////////////
+            var tournament_ref = firebase.database().ref("tournaments/");
+			
+            tournament_ref.limitToLast(1).on("value", function(snapshot) {
+                var json = snapshot.val();
+
+                for (key in json) {
+                    if (!json.hasOwnProperty(key)) continue;
+                    document.getElementById("expressinterest").value = key;
+                    document.getElementById("tournamentname").innerHTML = json[key].tournament_name;
+                    document.getElementById("tournamentdescription").innerHTML = json[key].tournament_description;
+
+                    document.getElementById("location").innerHTML = json[key].location;
+                    ////////////////////////////////////////////////////////////////////////////////////////////////
+                    //madhu/
+                    //view the data from last to first//
+                    //////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+                    tournament_ref.limitToFirst(1).on("child_added", function(tournament_snapshot) {
+                        var tournamentdata = tournament_snapshot.val();
+                        document.getElementById("tournament_name").innerHTML = tournamentdata.tournament_name;
+                        document.getElementById("tournament_location").innerHTML = tournamentdata.location;
+
+                        var tournamentview = firebase.database().ref("tournaments").orderByKey();
+                        tournamentview.once("value").then(function(snapshot) {
+                            snapshot.forEach(function(childSnapshot) {
+                                var childdata = childSnapshot.val();
+
+                                $("#view").not.last - cild.prepend('<div id="tournament_name">' + childdata.tournament_name + '</div> ' +
+                                    '<div id="location">' + childdata.location + '</div>');
+
+
+								
+
+                            });
+                        });
+                    });
+					
+                    ////////////////////////////////////////////////////////////////////////////////////////////////
+                }
+				
+				
+            }, function(error) {
+                console.log("Error: " + error.code);
+
+            });
+			
+                //Past Tournaments view//
+                //////////////////////////////////////////////////////////////////////////////////////////
+                var query = firebase.database().ref("tournaments").orderByKey();
+                query.limitToLast(8).once("value").then(function(tournament_snapshot) {
+
+
+                    tournament_snapshot.forEach(function(childSnapshot) {
+                        var childdata = childSnapshot.val();
+                        $("#pastgames").append('<a data-wow-duration="0.25s" href="" class="item g1 col-md-3 col-sm-3 col-xs-6 wow fadeIn">' +
+                            '<div class="item-wrap">' +
+                                '<img class="lazyOwl" src="images/billiards.jpg" title="" alt="" />' +
+                                '<div class="">' +
+                                    '<div class="cms-team-content">'+
+                                        '<h3 class="cms-team-title">'+
+                                            childdata.tournament_name +
+                                        '</h3>'+
+                                        '<div class="cms-team-intro">'+
+                                            '<ul class="cms-team-social">'+
+                                                '<li>'+
+                                                    '<i class="fa fa-trophy"></i>Xyfhden Jiesja'+
+                                                '</li>'+
+                                                '<li>'+
+                                                    '<i class="fa fa-map-marker"></i>' + childdata.location +
+                                                '</li>'+
+                                            '</ul>'+
+
+                                        '</div>'+
+                                    '</div>'+
+                                '</div>'+
+                            '</div>'+
+                        '</a>');
+
+
+
+
+
+
+
+
+                    });
+                });
+                //////////////////////////////////////////////////////////////////////////////////////////
+
+        });
+        //madhu
+ 
+        function checkUser() {
+            firebase.auth().onAuthStateChanged(function(user) {
+
+                if (user) {
+                    document.getElementById("expressinterest").setAttribute("href", "#expressinterestmodal");
+					//check_interest(user);
+					 var interest_ref = firebase.database().ref("interest/");
+					interest_ref.orderByChild('Uid').equalTo(user.uid).on("child_added", function(interest_snapshot) {
+                        var interestdata = interest_snapshot.val();
+                        if (interestdata.tournament_key == document.getElementById("expressinterest").value) {
+                            $("#my").html('<a href="#booknow" class="link-w3l1" data-toggle="modal">Book Now</a>');
+                        } else {
+                            $("#my").html('<a href="#expressinterestmodal" class="link-w3l1" data-toggle="modal">Express Interest</a>');
+                        }
+					$('#my').css({'display': 'block'});
+                    });
+
+                } else {
+                    document.getElementById("expressinterest").setAttribute("href", "#readmore");
+					$('#my').css({'display': 'block'});
+                }
+				
+            });
+        }
+		function check_interest(user){
+		
+		 }
+        //insert 
+        //////////////////////////////////////////////////////////////////////////////////////////////////////
+        function interest_insert(user, location, day, timestamp, t_key) {
+
+            var ref = firebase.database().ref("interest/");
+            
+            ref.push({
+                Uid: user,
+                prefered_location: location,
+                prefered_day: day,
+                time: timestamp,
+                tournament_key: t_key
+
+            });
+            alert("Thank You for your interest in the tournament");
+
+            window.location = "index.html";
+			
+
+        }
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+
+        // function check_authentication() {
+        //   firebase.auth().onAuthStateChanged(function (user) {
+        //     if (!user) {
+        //       window.location = "./login.html";
+        //     }
+        //   })
+        // }
+        // $(document).ready(function () {
+        //   check_authentication();
+        // });
+        // $.urlParam = function(name){
+        //     var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+        //     if (results==null){
+        //        return null;
+        //     }
+        //     else{
+        //        return decodeURI(results[1]) || 0;
+        //     }
+        // }
+        function express_interest() {
+
+            firebase.auth().onAuthStateChanged(function(user) { //check whether s user z signed in r nt//
+
+                var user = firebase.auth().currentUser;
+                var uid = user.uid;
+                var url_prefered_location = document.getElementById("prefered_location").value;
+                var url_prefered_day = document.getElementById("prefered_day").value;
+                var timestamp = firebase.database.ServerValue.TIMESTAMP;
+                var tournament_key = document.getElementById("expressinterest").value;
+				if(url_prefered_location)
+					interest_insert(uid, url_prefered_location, url_prefered_day, timestamp, tournament_key);
+				else
+					alert("Please Give a Location");
+            });
+        }
+    </script>
+<script src="js/wow.min.js"></script>
+<script>
+     new WOW().init();
+    </script>
+    <script src="js/jquery.fadeshow-0.1.2.js" type="text/javascript"></script>
+    <script type="text/javascript">
+  	$(function(){
+  		var fadeShow = $(".background").fadeShow({
+  			correctRatio: true,
+  			shuffle: true,
+  			speed: 10000,
+  			images: ['images/1.jpg',
+  					 'images/2.jpg',
+  					 'images/3.jpg']
+  		});
+  	});
+  	</script>
+</body>
+
+</html>

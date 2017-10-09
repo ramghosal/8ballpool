@@ -1,0 +1,91 @@
+    <!-- ============================================================== -->
+    <!-- Preloader -->
+    <!-- ============================================================== -->
+    <!-- <div class="preloader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+            </svg>
+        </div> -->
+        <!-- ============================================================== -->
+        <!-- Wrapper -->
+        <!-- ============================================================== -->
+        <script>
+
+$(document).ready(function(){
+  check();
+
+});
+
+ function check(){
+firebase.auth().onAuthStateChanged(function(user)
+{
+  if (user) {
+	if(user.email!="admin@gmail.com"){
+		window.location.href="login.html";
+	}
+	else{
+	}
+  }
+        else {
+    // No user is signed in.
+
+    window.location.href="login.html";
+  }
+ })
+ }
+            </script>
+        <div id="wrapper">
+            <!-- ============================================================== -->
+            <!-- Topbar header - style you can find in pages.scss -->
+            <!-- ============================================================== -->
+            <nav class="navbar navbar-default navbar-static-top m-b-0">
+                <div class="navbar-header">
+                    <div class="top-left-part">
+                        <!-- Logo -->
+                        <a class="logo" href="index.html">
+                            <img src="images/logo.png" />
+                              <!--<h1>8 BALL POOL</h1>-->                        
+                          </a>
+                    </div>
+                    <!-- /Logo -->
+                    <ul class="nav navbar-top-links navbar-right pull-right">
+                        <li>
+                            <a class="profile-pic" href="#"> <img src="../plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle"><b class="hidden-xs">Admin</b></a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-header -->
+                <!-- /.navbar-top-links -->
+                <!-- /.navbar-static-side -->
+            </nav>
+            <!-- End Top Navigation -->
+            <!-- ============================================================== -->
+            <!-- Left Sidebar - style you can find in sidebar.scss  -->
+            <!-- ============================================================== -->
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav slimscrollsidebar">
+                    <div class="sidebar-head">
+                        <h3><span class="fa-fw open-close"><i class="ti-close ti-menu"></i></span> <span class="hide-menu">Navigation</span></h3>
+                    </div>
+                    <ul class="nav" id="side-menu">
+                        <li style="padding: 70px 0 0;">
+                            <a href="index.html" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="tournamentview.html" class="waves-effect"><i class="fa fa-stack-exchange fa-fw" aria-hidden="true"></i>Tournaments</a>
+                        </li>
+                        <li>
+                            <a href="payments.html" class="waves-effect"><i class="fa fa-usd fa-fw" aria-hidden="true"></i>Payments</a>
+                        </li>
+                        <li>
+                            <a href="#" class="waves-effect"><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i>Reports</a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Left Sidebar -->
+            <!-- ============================================================== -->

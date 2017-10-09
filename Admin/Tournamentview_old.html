@@ -1,0 +1,89 @@
+<html>
+
+<head>
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-messaging.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-storage.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyBufoTjjlnhdpjUfGY_TRM7pqhE4ZNvir4",
+      authDomain: "ballpool-d1979.firebaseapp.com",
+      databaseURL: "https://ballpool-d1979.firebaseio.com",
+      projectId: "ballpool-d1979",
+      storageBucket: "ballpool-d1979.appspot.com",
+      messagingSenderId: "116075324547"
+    };
+    firebase.initializeApp(config);
+  </script>
+</head>
+
+<body>
+
+  <div id="link"><a href="tournamentinsert.html">Add tournament</a></div>
+
+  <div id="view">
+    <div id="tournament_datetime"></div>
+    <div id="tournament_name"></div>
+    <div id="location"></div>
+
+
+  </div>
+
+</body>
+<script>
+    $(document).ready(function () {  //function call
+      tournament_load();     //function defined
+    });
+   
+    function Delete(node) {
+
+      var ref = firebase.database().ref("tournaments");
+      ref.child(node).remove();
+    }
+function update(node1){
+      var edit=node1;
+      window.location="update.html?child_key="+edit;
+
+    }
+
+
+    function tournament_load() {
+      firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+          // User is signed in.
+          var tournamentview = firebase.database().ref("tournaments").orderByKey();
+          tournamentview.once("value").then(function (snapshot) {
+            snapshot.forEach(function (childSnapshot) {
+              var childdata = childSnapshot.val();
+              // var key = childSnapshot.key;
+              // var childData = childSnapshot.val();   
+              // var name_val = childSnapshot.val().name;  
+              $("#view").append('<div id="tournament_datetime">' + childdata.tournament_datetime + '</div>' +
+                '<div id="tournament_name">' + childdata.tournament_name + '</div> ' +
+                '<div id="location">' + childdata.location + '</div>' +
+                '<div id="action"><button id="cut" value="' + childSnapshot.key + '" onclick="Delete(this.value);">Delete</button> </div>'+
+                '<div id="action"><button id="cut" value="' + childSnapshot.key + '" onclick="update(this.value);">Edit</button> </div>');
+
+            });
+          });
+
+        }
+
+        else {
+          // No user is signed in.
+          document.write("You are not signedin.");
+        }
+      });
+    }
+
+</script>
+
+</html>

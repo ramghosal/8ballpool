@@ -1,0 +1,107 @@
+<html>
+
+<head>
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-messaging.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-storage.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyBufoTjjlnhdpjUfGY_TRM7pqhE4ZNvir4",
+      authDomain: "ballpool-d1979.firebaseapp.com",
+      databaseURL: "https://ballpool-d1979.firebaseio.com",
+      projectId: "ballpool-d1979",
+      storageBucket: "ballpool-d1979.appspot.com",
+      messagingSenderId: "116075324547"
+    };
+    firebase.initializeApp(config);
+  </script>
+</head>
+   
+<body>
+
+  <table>
+    
+    <td colspan="2">
+      <button id="interest" onclick="express_interest()" value="submit">booknow</button>
+
+      <!-- <input type="submit" name="submit" value="register"> -->
+  </table>
+</body>
+<script>
+
+    function bookings_insert(user, timestamp, t_key) {
+      
+      var ref = firebase.database().ref("bookings/");
+      // alert(user + timestamp + t_key);
+
+      ref.push({
+        Uid:user,
+        time: timestamp,
+        tournament_key: t_key
+       
+      });
+     
+    }
+    function check_authentication() {
+      firebase.auth().onAuthStateChanged(function (user) {
+        if (!user) {
+          window.location = "./login.html";
+        }
+      })
+    }
+    $(document).ready(function () {
+      check_authentication();
+    });
+$.urlParam = function(name){
+    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    if (results==null){
+       return null;
+    }
+    else{
+       return decodeURI(results[1]) || 0;
+    }
+}
+    function express_interest() {
+
+      firebase.auth().onAuthStateChanged(function (user) { //check whether s user z signed in r nt//
+
+        var user = firebase.auth().currentUser;
+        var uid = user.uid;
+        var timestamp = firebase.database.ServerValue.TIMESTAMP;
+        var tournament_key = $.urlParam('tournament_key');
+
+        bookings_insert(uid, timestamp, tournament_key);
+      });
+    }
+    
+var ref = firebase.database().ref("tournaments/");
+        ref.on("value", function(snapshot) 
+        {
+           var json = snapshot.val();
+           for (key in json) {
+            if (!json.hasOwnProperty(key)) continue;
+            document.getElementById("tor").value = key;
+            document.getElementById("tournamentname").innerHTML = json[key].tournament_name;  
+           document.getElementById("location").innerHTML = json[key].location;
+            
+          }           
+        }, function (error) 
+        {
+          console.log("Error: " + error.code);
+          
+        });       
+
+
+
+
+</script>
+
+</html>

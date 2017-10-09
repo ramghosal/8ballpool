@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="">
+    <title>Admin | 8 Ball Pool</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Menu CSS -->
+    <link href="../plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
+    <!-- animation CSS -->
+    <link href="css/animate.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+    <!-- color CSS -->
+    <link href="css/colors/default.css" id="theme" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+    <script>
+            // Initialize Firebase
+            var config = {
+              apiKey: "AIzaSyBufoTjjlnhdpjUfGY_TRM7pqhE4ZNvir4",
+              authDomain: "ballpool-d1979.firebaseapp.com",
+              databaseURL: "https://ballpool-d1979.firebaseio.com",
+              projectId: "ballpool-d1979",
+              storageBucket: "ballpool-d1979.appspot.com",
+              messagingSenderId: "116075324547"
+            };
+            firebase.initializeApp(config);
+          </script>
+
+</head>
+
+
+<body class="fix-header" ng-app="8ballpoolApp"  ng-controller="ctrl">
+    <div ng-include="'header.htm'"></div>
+    <!-- ============================================================== -->
+    <!-- Page Content -->
+    <!-- ============================================================== -->
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row bg-title">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                    <h4 class="page-title">Payments</h4>
+                </div>
+                <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+                    <a href="#" class="btn btn-success pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light" onclick="exportTableToCSV('payments.csv')">Export To CSV File</a>
+
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /row -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="white-box">
+                        <h3 class="box-title" id="tournamentname" >Payments for {{tournamentname}}</h3>
+                        <div class="table-responsive">
+                            <table class="table" id="view">
+                                <thead>
+                                    <tr>
+                                        <th>Payee Name</th>
+                                        <th>Type</th>
+                                        <th>Status</th>
+                                        <th>Amount</th>
+                                        <th>Action</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in payments">
+                                        <td>{{item.name}}</td>
+                                        <td>{{item.type}}</td>
+                                        <td>{{item.status}}</td>
+                                        <td>{{item.amount}}</td>
+                                         <td><button value="{{item.$id}}" class="btn btn-success" onclick="if(confirm('Do you want to initiat refund?'))refund(this.value)">Refund</button> 
+                                            <button value="{{item.$id}}" class="btn btn-danger" onclick="if(confirm('Do you want to cancel this booking?'))refund(this.value)">Accept Cancellation</button> </td>
+
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+        <footer class="footer text-center">© 2017 8 Ball Pool . All Rights Reserved | Powered by <a href="http://cdtfx.com/">CDTFX</a></footer>
+    </div>
+    <!-- /#page-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="../plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="../plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+    <!--slimscroll JavaScript -->
+    <script src="js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="js/waves.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="js/custom.min.js"></script>
+
+    <script>
+        // define our app and dependencies (remember to include firebase!)
+
+
+        var app = angular.module("8ballpoolApp", ["firebase"]);
+        // this factory returns a synchronized array of chat messages
+        // app.factory("tournaments", ["$firebaseArray",
+        //     function ($firebaseArray) {
+        //         // create a reference to the database location where we will store our data
+        //         var ref = new Firebase("https://ballpool-d1979.firebaseio.com/tournaments");
+
+        //         // this uses AngularFire to create the synchronized array
+        //         return $firebaseArray(ref);
+        //     }
+        // ]);
+
+
+        app.controller("ctrl", function ($scope, $firebaseArray) {
+          var ref = new Firebase("https://ballpool-d1979.firebaseio.com/tournaments");
+          // create a synchronized array
+          // click on `index.html` above to see it used in the DOM!
+          var tournaments = $firebaseArray(ref);
+          tournaments.$ref().orderByKey().limitToLast(1).on("value", function (dataSnapshot) {
+              var last_tournament = dataSnapshot.val();
+              for(key in last_tournament)
+              {
+              tournament_key = key;
+              if (dataSnapshot.exists()) {
+                  console.log("Tournament:", last_tournament[key]);
+
+                  $scope.tournamentname = last_tournament[key].tournament_name;
+                  var ref1 = new Firebase("https://ballpool-d1979.firebaseio.com/payments");
+                  var users = ref1.orderByChild("tournament_key").equalTo(key);
+                  $scope.payments=$firebaseArray(users);
+
+
+              } else {
+                  console.log("Not found.");
+              }
+              }
+          });
+
+
+      });
+
+
+
+
+        function refund(node) {
+
+            var ref1 = new Firebase("https://ballpool-d1979.firebaseio.com/payments/"+node);
+
+            ref1.once("value", function (dataSnapshot) {
+            var status=dataSnapshot.val().status;
+            var type=dataSnapshot.val().type;
+            console.log(status,type);
+            if(type=='full')
+            if(status=='refunded')
+              alert('refund already done');
+            else{
+              ref1.update({
+                  status:'refunded'
+              });
+              alert('Refund Approved');
+            }
+            else
+             alert('Partial Payment cannot be refunded');
+
+            // var ref = firebase.database().ref("tournaments");
+            // ref.child(node).remove();
+            });
+        }
+        function update(node) {
+            var edit = node;
+            window.location = "tournamentupdate.html?child_key=" + edit;
+
+        }
+        function exportTableToCSV(filename) {
+            var csv = [];
+            var rows = document.querySelectorAll("table tr");
+            firebase.database().ref("payments").once("value",function(payments_ss){
+                var paymentsdata=payments_ss.val();
+                var row=[] ;
+                row.push("Payee Name");
+                row.push("E-mail");
+                row.push("Mobile");
+                row.push("Type");
+                row.push("Status");
+                row.push("Amount");
+                
+                csv.push(row.join(","));
+                for(key in paymentsdata){
+                    var row=[];
+                    row.push(paymentsdata[key].name);
+                    row.push(paymentsdata[key].email);
+                    row.push(paymentsdata[key].mobile);
+                    row.push(paymentsdata[key].type);
+                    row.push(paymentsdata[key].status);
+                    row.push(paymentsdata[key].amount);
+                    
+                    csv.push(row.join(","));
+                }
+                // Download CSV file
+                      downloadCSV(csv.join("\n"), filename);
+            });
+
+      
+            
+        }
+
+            function downloadCSV(csv, filename) {
+                    var csvFile;
+                    var downloadLink;
+
+                    // CSV file
+                    csvFile = new Blob([csv], { type: "text/csv" });
+
+                    // Download link
+                    downloadLink = document.createElement("a");
+
+                    // File name
+                    downloadLink.download = filename;
+
+                    // Create a link to the file
+                    downloadLink.href = window.URL.createObjectURL(csvFile);
+
+                    // Hide download link
+                    downloadLink.style.display = "none";
+
+                    // Add the link to DOM
+                    document.body.appendChild(downloadLink);
+
+                    // Click download link
+                    downloadLink.click();
+                }
+    
+    </script>
+</body>
+
+</html>

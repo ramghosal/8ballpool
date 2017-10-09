@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="">
+    <title>Admin | 8 Ball Pool</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Menu CSS -->
+    <link href="../plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
+    <!-- animation CSS -->
+    <link href="css/animate.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+    <!-- color CSS -->
+    <link href="css/colors/default.css" id="theme" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+    <script>
+            // Initialize Firebase
+            var config = {
+              apiKey: "AIzaSyBufoTjjlnhdpjUfGY_TRM7pqhE4ZNvir4",
+              authDomain: "ballpool-d1979.firebaseapp.com",
+              databaseURL: "https://ballpool-d1979.firebaseio.com",
+              projectId: "ballpool-d1979",
+              storageBucket: "ballpool-d1979.appspot.com",
+              messagingSenderId: "116075324547"
+            };
+            firebase.initializeApp(config);
+
+ </script>
+ <style>
+ .switch {
+    position: relative;
+    width: 60px;
+    height: 30px;
+    float: right;
+  }
+  
+  .switch input {display:none;}
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 23px;
+    width: 23px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+  </style>
+</head>
+
+<body class="fix-header" ng-app="8ballpoolApp">
+    <div ng-include="'header.htm'"></div>
+
+         <!-- ============================================================== -->
+        <!-- Page Content -->
+        <!-- ============================================================== -->
+        <div id="page-wrapper" >
+            <div class="container-fluid">
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Dashboard</h4> </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+                        <ol class="breadcrumb">
+                            <li><a href="#">Dashboard</a></li>
+                        </ol>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+
+                <!--first block-->
+                <div class="row">
+                    <!-- .col -->
+                    <div class="row">
+                    <div class="col-md-12 col-lg-8 col-sm-12">
+                        <div class="white-box">
+                            <h3 class="box-title">Active Tournament</h3>
+                            <div class="comment-center p-t-10">
+                                <div class="comment-body" ng-controller="ctrl">
+                                    <div style="width:30%;float:left;"> <img src="../images/billiards.jpg" alt="user" height="150" width="150">
+                                    </div>
+                                    <div style="width:70%;float:right;">
+                                        <h4>{{last_tournament.tournament_name}}</h4>
+                                        <br/><span>{{last_tournament.tournament_description}}</span>
+                                    </div>
+                                     <div>
+
+                                    <div style="width:70%;float:right;margin-top: 2%;">
+
+                                        Date : {{last_tournament.tournament_datetime}}
+                                       <br/>
+                                        Location : {{last_tournament.location}}
+                                    </div>
+                                </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                     <div class="col-lg-4 col-md-6 col-sm-12">
+                       <div class="white-box">
+                           <h3 class="box-title">Funds Collected</h3>
+                                    <div class="panel-body text-center">
+                                      <h1>Rs 2100</h1>
+
+                        </div>
+                        <input type="hidden" id='hiddenkey'/>
+                     </div>
+                </div>
+              </div>
+                <!-- /.row -->
+                <!-- ============================================================== -->
+                <!-- Different data widgets -->
+                <!-- ============================================================== -->
+                <!-- .row -->
+                <div class="row">
+                    <div class="col-lg-6 col-sm-6 col-xs-12">
+                        <div class="white-box analytics-info" ng-controller="ctrl">
+                            <h3 class="box-title">EXPRESSED INTEREST<span style="float:right;font-size:12px;text-transform: none;">View All</span></h3>
+                           <div class="comment-center p-t-10" >
+                                <div class="comment-body" ng-repeat="item in interests">
+                                    <table>
+                                        <tr>
+                                            <td> <div class="user-img"> <img src="{{item.image_url}}" alt="user" class="img-circle"></td>
+                                                <td class="mail-contnet" style="width: 115px;"><h5  style="margin:0;">{{item.name}}</h5></td>
+                                                    <td style="font-size:14px;padding-left:40px;">Preferred Day : {{item.prefered_day}}<br/>
+                                                Preferred Location : {{item.prefered_location}}</td>
+
+                                        </tr>
+                                    </table>
+
+                                    </div>
+
+
+
+                           </div>
+                        </div>
+                        </div>
+
+                    <div class="col-lg-6 col-sm-6 col-xs-12">
+                        <div class="white-box analytics-info" ng-controller="ctrl">
+                            <h3 class="box-title">JOINED<span style="float:right;font-size:12px;text-transform: none;">View All</span></h3>
+                             <div class="comment-center p-t-10">
+                                <div class="comment-body" ng-repeat="item in joined">
+                                    <table>
+                                        <tr >
+                                            <td> <div class="user-img"> <img src="{{item.image_url}}" alt="user" class="img-circle"></td>
+                                                <td class="mail-contnet" style="width: 115px;"><h5  style="margin:0;">{{item.name}}</h5></td>
+                                                 <td style="font-size:14px;padding:10px">$ {{item.amount}}</td>
+                                        </tr>
+                                    </table>
+
+                                    </div>
+
+
+                                <!-- <div class="comment-body">
+                                    <table>
+                                        <tr>
+                                            <td><div class="user-img"> <img src="../images/billiards.jpg" alt="user" class="img-circle">
+                                            </td>
+                                                <td class="mail-contnet"><h5 style="margin-top:20%;">Sonu Nigam</h5></td>
+                                                   <td style="font-size:10px;text-align:center;padding:10px">100</td>
+
+                                        </tr>
+                                    </table>
+
+
+                                    </div>
+                                      <div class="comment-body">
+                                    <table>
+                                        <tr>
+                                            <td><div class="user-img"> <img src="../images/billiards.jpg" alt="user" class="img-circle">
+                                            </td>
+                                                <td class="mail-contnet"><h5 style="margin-top:20%;">Arijit singh</h5></td>
+                                                    <td style="font-size:10px;text-align:center;padding:10px">100</td>
+
+                                        </tr>
+                                    </table>
+
+                                      </div>-->
+                           </div>
+                         </div>
+                    </div>
+                    <!--<div class="col-lg-4 col-sm-6 col-xs-12">
+                        <div class="white-box analytics-info">
+                            <h3 class="box-title">Unique Visitor</h3>
+                            <ul class="list-inline two-part">
+                                <li>
+                                    <div id="sparklinedash3"></div>
+                                </li>
+                                <li class="text-right"><i class="ti-arrow-up text-info"></i> <span class="counter text-info">911</span></li>
+                            </ul>
+                        </div>
+                    </div>-->
+                </div>
+
+                <!--/.row -->
+                <!--row -->
+                <!-- /.row -->
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                        <div class="white-box">
+                            <h3 class="box-title">Fixture<span>
+                                
+                                    <label class="switch">
+                                        <input type="checkbox" id="visibility" onchange="setvisibility();">
+                                        <span class="slider round"></span>
+                                      </label>
+                                
+                            </h3>
+                            <!--<ul class="list-inline text-right">
+                                <li>
+                                    <h5><i class="fa fa-circle m-r-5 text-info"></i>Mac</h5> </li>
+                                <li>
+                                    <h5><i class="fa fa-circle m-r-5 text-inverse"></i>Windows</h5> </li>
+                            </ul>-->
+                            <!--<div id="ct-visits" style="height: 405px;"></div>-->
+                            <div id="wrapper" class="fixture clearfix">
+                        <div class="fix-left">
+                            <span class="label"><img src="../Images/user-profile-pic.png" height="70" id="slot301" onclick="choosewinner(this.id)"></span>
+                            <div class="branch lv1">
+
+
+                                <div class="entry"><span class="label"><img src="../Images/user-profile-pic.png" height="70" id="slot201" onclick="choosewinner(this.id)"></span>
+                                    <div class="branch lv2">
+
+                                        <div class="entry"><span class="label"><img src="../Images/user-profile-pic.png" height="70" id="slot101" onclick="choosewinner(this.id)"></span>
+                                            <div class="branch lv3">
+
+                                                <div class="entry"><span class="label"><img src="../Images/user-profile-pic.png" height="70" id="slot1" onclick="choosewinner(this.id)" style="transform: rotateY(180deg);"></span>
+
+                                                </div>
+                                                <div class="entry"><span class="label"><img src="../Images/user-profile-pic.png" height="70" id="slot2" onclick="choosewinner(this.id)" style="transform: rotateY(180deg);"></span></div>
+                                            </div>
+                                        </div>
+                                        <div class="entry"><span class="label"><img src="../Images/user-profile-pic.png" height="70" id="slot102" onclick="choosewinner(this.id)"></span>
+                                            <div class="branch lv3">
+
+                                                <div class="entry"><span class="label"><img src="../Images/user-profile-pic.png" height="70" id="slot3" onclick="choosewinner(this.id)" style="transform: rotateY(180deg);"></span>
+
+                                                </div>
+                                                <div class="entry"><span class="label"><img src="../Images/user-profile-pic.png" height="70" id="slot4" onclick="choosewinner(this.id)" style="transform: rotateY(180deg);"></span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="entry"><span class="label"><img src="../Images/user-profile-pic.png" height="70"  id="slot202" onclick="choosewinner(this.id)"></span>
+                                    <div class="branch lv2">
+
+                                        <div class="entry"><span class="label"><img src="../Images/user-profile-pic.png" height="70" id="slot103" onclick="choosewinner(this.id)"></span>
+                                            <div class="branch lv3">
+
+                                                <div class="entry"><span class="label"><img src="../Images/user-profile-pic.png" height="70" id="slot5" onclick="choosewinner(this.id)" style="transform: rotateY(180deg);"></span>
+
+                                                </div>
+                                                <div class="entry"><span class="label"><img src="../Images/user-profile-pic.png" height="70" id="slot6" onclick="choosewinner(this.id)" style="transform: rotateY(180deg);"></span></div>
+                                            </div>
+                                        </div>
+                                        <div class="entry"><span class="label"><img src="../Images/user-profile-pic.png" height="70"  id="slot104" onclick="choosewinner(this.id)"></span>
+                                            <div class="branch lv3">
+
+                                                <div class="entry"><span class="label"><img src="../Images/user-profile-pic.png" height="70" id="slot7" onclick="choosewinner(this.id)" style="transform: rotateY(180deg);"></span>
+
+                                                </div>
+                                                <div class="entry"><span class="label"><img src="../Images/user-profile-pic.png" height="70" id="slot8" onclick="choosewinner(this.id)" style="transform: rotateY(180deg);"></span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="fix-right">
+                            <span class="label"><img src="../Images/user-profile-pic.png" height="70" id="slot302" onclick="choosewinner(this.id)"></span>
+                            <div class="branch lv1">
+
+
+                                <div class="entry"><span class="label"><img src="../Images/user-profile-pic.png" height="70" id="slot203" onclick="choosewinner(this.id)"></span>
+                                    <div class="branch lv2">
+
+                                        <div class="entry"><span class="label"><img src="../Images/user-profile-pic.png" height="70" id="slot105" onclick="choosewinner(this.id)"></span>
+                                            <div class="branch lv3">
+
+                                                <div class="entry"><span class="label"><img src="../Images/user-profile-pic.png" height="70" id="slot9" onclick="choosewinner(this.id)"></span>
+
+                                                </div>
+                                                <div class="entry"><span class="label"><img src="../Images/user-profile-pic.png" height="70" id="slot10" onclick="choosewinner(this.id)"></span></div>
+                                            </div>
+                                        </div>
+                                        <div class="entry"><span class="label"><img src="../Images/user-profile-pic.png" height="70" id="slot106" onclick="choosewinner(this.id)"></span>
+                                            <div class="branch lv3">
+
+                                                <div class="entry"><span class="label"><img src="../Images/user-profile-pic.png" height="70" id="slot11" onclick="choosewinner(this.id)"></span>
+
+                                                </div>
+                                                <div class="entry"><span class="label"><img src="../Images/user-profile-pic.png" height="70" id="slot12" onclick="choosewinner(this.id)"></span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="entry"><span class="label"><img src="../Images/user-profile-pic.png" height="70" id="slot204" onclick="choosewinner(this.id)"></span>
+                                    <div class="branch lv2">
+
+                                        <div class="entry"><span class="label"><img src="../Images/user-profile-pic.png" height="70" id="slot107" onclick="choosewinner(this.id)"></span>
+                                            <div class="branch lv3">
+
+                                                <div class="entry"><span class="label"><img src="../Images/user-profile-pic.png" height="70" id="slot13" onclick="choosewinner(this.id)"></span>
+
+                                                </div>
+                                                <div class="entry"><span class="label"><img src="../Images/user-profile-pic.png" height="70" id="slot14" onclick="choosewinner(this.id)"></span></div>
+                                            </div>
+                                        </div>
+                                        <div class="entry"><span class="label"><img src="../Images/user-profile-pic.png" height="70" id="slot108" onclick="choosewinner(this.id)"></span>
+                                            <div class="branch lv3">
+
+                                                <div class="entry"><span class="label"><img src="../Images/user-profile-pic.png" height="70" id="slot15" onclick="choosewinner(this.id)"></span>
+
+                                                </div>
+                                                <div class="entry"><span class="label"><img src="../Images/user-profile-pic.png" height="70" id="slot16" onclick="choosewinner(this.id)"></span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- table -->
+                <!-- ============================================================== -->
+
+                <!-- ============================================================== -->
+                <!-- chat-listing & recent comments -->
+                <!-- ============================================================== -->
+
+            </div>
+            <!-- /.container-fluid -->
+            <footer class="footer text-center">© 2017 8 Ball Pool . All Rights Reserved | Powered by <a href="http://cdtfx.com/">CDTFX</a></footer>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page Content -->
+        <!-- ============================================================== -->
+
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="../plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="../plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+    <!--slimscroll JavaScript -->
+    <script src="js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="js/waves.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="js/custom.min.js"></script>
+
+    <script>
+        // define our app and dependencies (remember to include firebase!)
+
+
+            var app = angular.module("8ballpoolApp", ["firebase"]);
+
+            //$scope.tournament_key = "";
+
+            app.controller("ctrl", function ($scope, $firebaseArray) {
+                var ref = new Firebase("https://ballpool-d1979.firebaseio.com/tournaments");
+
+                // create a synchronized array
+                // click on `index.html` above to see it used in the DOM!
+                var tournaments = $firebaseArray(ref);
+                tournaments.$ref().orderByKey().limitToLast(1).on("value", function (dataSnapshot) {
+                    var last_tournament = dataSnapshot.val();
+                    for(key in last_tournament)
+                    {
+                    tournament_key = key;
+                    document.getElementById('hiddenkey').value=tournament_key;
+                    if (dataSnapshot.exists()) {
+                        // console.log("Tournament:", last_tournament[key]);
+                        $scope.last_tournament = last_tournament[key];
+                        getslotdata(tournament_key);
+                        if(last_tournament[key].visible)
+                            document.getElementById("visibility").checked=true;
+                        else
+                            document.getElementById("visibility").checked=false;
+                        var ref1 = new Firebase("https://ballpool-d1979.firebaseio.com/interest");
+                        var users = ref1.orderByChild("tournament_key").equalTo(key).limitToLast(5);
+                        
+                        
+                        /*users.once("value",function(usersnap){
+                            
+                            var url="";
+                            for (key in usersnap.val()){
+                                
+                            firebase.database().ref("user_register/"+key).once("value",function(usersnapshot){
+                                    url=usersnapshot.val();
+                                    users[key].update({
+                                           image_url:url.image_url 
+                                    });
+                            });
+                        }
+                               
+                        });*/
+                        $scope.interests=$firebaseArray(users);
+                       
+                        var ref2 = new Firebase("https://ballpool-d1979.firebaseio.com/payments");
+                        var users = ref2.orderByChild("tournament_key").equalTo(key).limitToLast(5);
+                        // console.log($firebaseArray(users));
+                        $scope.joined=$firebaseArray(users);
+                    } else {
+                        console.log("Not found.");
+                    }
+                    }
+                });
+
+
+            });
+                app.controller("ctrl_interest", function ($scope, $firebaseArray) {
+                    var ref1 = new Firebase("https://ballpool-d1979.firebaseio.com/interest");
+                    var ref2 = new Firebase("https://ballpool-d1979.firebaseio.com/user_register");
+
+                    // create a synchronized array
+                    // click on `index.html` above to see it used in the DOM!
+
+                    var interests = $firebaseArray(ref1);
+                    var users = ref1.orderByChild("tournament_key").equalTo($scope.tournament_key);
+                    // console.log(users);
+                    // console.log("Interest",interests);
+                    /*interests.$ref().orderByKey().equals(tournament_key).on("value", function (dataSnapshot) {
+                    var last_tournament = dataSnapshot.val();
+                    */
+
+
+
+
+            });
+            function getslotdata(tournament_key){
+                tournament_ref=firebase.database().ref("tournaments/"+tournament_key+"/bookedslots/") ;
+                tournament_ref.orderByChild("slotno").once("value",function(slotsnapshot){
+                    var slotdata=slotsnapshot.val();
+                    for(key in slotdata){
+                        // console.log("Slot" + slotdata[key].slotno);
+                        switch(slotdata[key].slotno){
+                            case 1:document.getElementById("slot1").setAttribute("title",slotdata[key].username);
+                            firebase.database().ref("user_register/"+slotdata[key].userkey).once("value",function(snapshot){
+                                var data=snapshot.val();
+                                if(data.image_url.length>2)
+                                    document.getElementById("slot1").src=data.image_url;
+                                    else
+                                document.getElementById("slot1").src="../Images/user-present.png";
+                                
+                            });break;
+                            case 2:document.getElementById("slot2").setAttribute("title",slotdata[key].username);
+                            firebase.database().ref("user_register/"+slotdata[key].userkey).once("value",function(snapshot){
+                                var data=snapshot.val();
+                                if(data.image_url.length>2)
+                                document.getElementById("slot2").src=data.image_url;
+                                else
+                                document.getElementById("slot2").src="../Images/user-present.png";
+                                
+                            });break;
+                            case 3:document.getElementById("slot3").setAttribute("title",slotdata[key].username);
+                            firebase.database().ref("user_register/"+slotdata[key].userkey).once("value",function(snapshot){
+                                var data=snapshot.val();
+                                if(data.image_url.length>2)
+                                document.getElementById("slot3").src=data.image_url;
+                                else
+                                document.getElementById("slot3").src="../Images/user-present.png";
+                                document.getElementById("slot3").setAttribute("onclick",choosewinner);
+                                
+                            });break;
+                            case 4:document.getElementById("slot4").setAttribute("title",slotdata[key].username);
+                            firebase.database().ref("user_register/"+slotdata[key].userkey).once("value",function(snapshot){
+                                var data=snapshot.val();
+                                if(data.image_url.length>2)
+                                document.getElementById("slot4").src=data.image_url;
+                                else
+                                document.getElementById("slot4").src="../Images/user-present.png";
+                                
+                            });break;
+                            case 5:document.getElementById("slot5").setAttribute("title",slotdata[key].username);
+                            firebase.database().ref("user_register/"+slotdata[key].userkey).once("value",function(snapshot){
+                                var data=snapshot.val();
+                                if(data.image_url.length>2)
+                                document.getElementById("slot5").src=data.image_url;
+                                else
+                                document.getElementById("slot5").src="../Images/user-present.png";
+                                
+                            });break;
+                            case 6:document.getElementById("slot6").setAttribute("title",slotdata[key].username);
+                            firebase.database().ref("user_register/"+slotdata[key].userkey).once("value",function(snapshot){
+                                var data=snapshot.val();
+                                if(data.image_url.length>2)
+                                document.getElementById("slot6").src=data.image_url;
+                                else
+                                document.getElementById("slot6").src="../Images/user-present.png";
+                                
+                            });break;
+                            case 7:document.getElementById("slot7").setAttribute("title",slotdata[key].username);
+                            firebase.database().ref("user_register/"+slotdata[key].userkey).once("value",function(snapshot){
+                                var data=snapshot.val();
+                                if(data.image_url.length>2)
+                                document.getElementById("slot7").src=data.image_url;
+                                else
+                                document.getElementById("slot7").src="../Images/user-present.png";
+                                
+                            });break;
+                            case 8:document.getElementById("slot8").setAttribute("title",slotdata[key].username);
+                            firebase.database().ref("user_register/"+slotdata[key].userkey).once("value",function(snapshot){
+                                var data=snapshot.val();
+                                if(data.image_url.length>2)
+                                document.getElementById("slot8").src=data.image_url;
+                                else
+                                document.getElementById("slot8").src="../Images/user-present.png";
+                                
+                            });
+                            break;
+                            case 9:document.getElementById("slot9").setAttribute("title",slotdata[key].username);
+                            firebase.database().ref("user_register/"+slotdata[key].userkey).once("value",function(snapshot){
+                                var data=snapshot.val();
+                                if(data.image_url.length>2)
+                                document.getElementById("slot9").src=data.image_url;
+                                else
+                                document.getElementById("slot9").src="../Images/user-present.png";
+                                
+                            });break;
+                            case 10:document.getElementById("slot10").setAttribute("title",slotdata[key].username);
+                            firebase.database().ref("user_register/"+slotdata[key].userkey).once("value",function(snapshot){
+                                var data=snapshot.val();
+                                if(data.image_url.length>2)
+                                document.getElementById("slot10").src=data.image_url;
+                                else
+                                document.getElementById("slot10").src="../Images/user-present.png";
+                                
+                            });break;
+                            case 11:document.getElementById("slot11").setAttribute("title",slotdata[key].username);
+                            firebase.database().ref("user_register/"+slotdata[key].userkey).once("value",function(snapshot){
+                                var data=snapshot.val();
+                                if(data.image_url.length>2)
+                                document.getElementById("slot11").src=data.image_url;
+                                else
+                                document.getElementById("slot11").src="../Images/user-present.png";
+                                
+                            });break;
+                            case 12:document.getElementById("slot12").setAttribute("title",slotdata[key].username);
+                            firebase.database().ref("user_register/"+slotdata[key].userkey).once("value",function(snapshot){
+                                var data=snapshot.val();
+                                if(data.image_url.length>2)
+                                document.getElementById("slot12").src=data.image_url;
+                                else
+                                document.getElementById("slot12").src="../Images/user-present.png";
+                            });break;
+                            case 13:document.getElementById("slot13").setAttribute("title",slotdata[key].username);
+                            firebase.database().ref("user_register/"+slotdata[key].userkey).once("value",function(snapshot){
+                                var data=snapshot.val();
+                                if(data.image_url.length>2)
+                                document.getElementById("slot13").src=data.image_url;
+                                else
+                                document.getElementById("slot13").src="../Images/user-present.png";
+                            });break;
+                            case 14:document.getElementById("slot14").setAttribute("title",slotdata[key].username);
+                            firebase.database().ref("user_register/"+slotdata[key].userkey).once("value",function(snapshot){
+                                var data=snapshot.val();
+                                if(data.image_url.length>2)
+                                document.getElementById("slot14").src=data.image_url;
+                                else
+                                document.getElementById("slot14").src="../Images/user-present.png";
+                            });break;
+                            case 15:document.getElementById("slot15").setAttribute("title",slotdata[key].username);
+                            firebase.database().ref("user_register/"+slotdata[key].userkey).once("value",function(snapshot){
+                                var data=snapshot.val();
+                                if(data.image_url.length>2)
+                                document.getElementById("slot15").src=data.image_url;
+                                else
+                                document.getElementById("slot15").src="../Images/user-present.png";
+                            });break;
+                            case 16:document.getElementById("slot16").setAttribute("title",slotdata[key].username);
+                            firebase.database().ref("user_register/"+slotdata[key].userkey).once("value",function(snapshot){
+                                var data=snapshot.val();
+                                if(data.image_url.length>2)
+                                document.getElementById("slot16").src=data.image_url;
+                                else
+                                document.getElementById("slot16").src="../Images/user-present.png";
+                            });break;
+                            case 17:document.getElementById("slot17").setAttribute("title",slotdata[key].username);
+                            firebase.database().ref("user_register/"+slotdata[key].userkey).once("value",function(snapshot){
+                                var data=snapshot.val();
+                                if(data.image_url.length>2)
+                                document.getElementById("slot17").src=data.image_url;
+                                else
+                                document.getElementById("slot17").src="../Images/user-present.png";
+                                
+                            });break;
+                            case 18:document.getElementById("slot18").setAttribute("title",slotdata[key].username);
+                            firebase.database().ref("user_register/"+slotdata[key].userkey).once("value",function(snapshot){
+                                var data=snapshot.val();
+                                if(data.image_url.length>2)
+                                document.getElementById("slot18").src=data.image_url;
+                                else
+                                document.getElementById("slot18").src="../Images/user-present.png";
+                                
+                            });break;
+                            case 19:document.getElementById("slot19").setAttribute("title",slotdata[key].username);
+                            firebase.database().ref("user_register/"+slotdata[key].userkey).once("value",function(snapshot){
+                                var data=snapshot.val();
+                                if(data.image_url.length>2)
+                                document.getElementById("slot19").src=data.image_url;
+                                else
+                                document.getElementById("slot19").src="../Images/user-present.png";
+                                
+                            });break;
+                            case 20:document.getElementById("slot20").setAttribute("title",slotdata[key].username);
+                            firebase.database().ref("user_register/"+slotdata[key].userkey).once("value",function(snapshot){
+                                var data=snapshot.val();
+                                if(data.image_url.length>2)
+                                document.getElementById("slot20").src=data.image_url;
+                                else
+                                document.getElementById("slot20").src="../Images/user-present.png";
+                                
+                            });break;
+                            //added level2 of slots 23.09
+                            case 101:document.getElementById("slot101").setAttribute("title",slotdata[key].username);
+                            firebase.database().ref("user_register/"+slotdata[key].userkey).once("value",function(snapshot){
+                                var data=snapshot.val();
+                                if(data.image_url.length>2)
+                                document.getElementById("slot101").src=data.image_url;
+                                else
+                                document.getElementById("slot101").src="../Images/user-present.png";
+                                document.getElementById("slot1").removeAttribute("onclick");
+                                document.getElementById("slot2").removeAttribute("onclick");
+                                
+                            });break;
+                            case 102:document.getElementById("slot102").setAttribute("title",slotdata[key].username);
+                            firebase.database().ref("user_register/"+slotdata[key].userkey).once("value",function(snapshot){
+                                var data=snapshot.val();
+                                if(data.image_url.length>2)
+                                document.getElementById("slot102").src=data.image_url;
+                                else
+                                document.getElementById("slot102").src="../Images/user-present.png";
+                                document.getElementById("slot1").removeAttribute("onclick");
+                                document.getElementById("slot2").removeAttribute("onclick");
+                            });break;
+                            case 103:document.getElementById("slot103").setAttribute("title",slotdata[key].username);
+                            firebase.database().ref("user_register/"+slotdata[key].userkey).once("value",function(snapshot){
+                                var data=snapshot.val();
+                                if(data.image_url.length>2)
+                                document.getElementById("slot103").src=data.image_url;
+                                else
+                                document.getElementById("slot103").src="../Images/user-present.png";
+                                document.getElementById("slot5").removeAttribute("onclick");
+                                document.getElementById("slot6").removeAttribute("onclick");
+                            });break;
+                            case 104:document.getElementById("slot104").setAttribute("title",slotdata[key].username);
+                            firebase.database().ref("user_register/"+slotdata[key].userkey).once("value",function(snapshot){
+                                var data=snapshot.val();
+                                if(data.image_url.length>2)
+                                document.getElementById("slot104").src=data.image_url;
+                                else
+                                document.getElementById("slot104").src="../Images/user-present.png";
+                                document.getElementById("slot7").removeAttribute("onclick");
+                                document.getElementById("slot8").removeAttribute("onclick");
+                            });break;
+                            case 105:document.getElementById("slot105").setAttribute("title",slotdata[key].username);
+                            firebase.database().ref("user_register/"+slotdata[key].userkey).once("value",function(snapshot){
+                                var data=snapshot.val();
+                                if(data.image_url.length>2)
+                                document.getElementById("slot105").src=data.image_url;
+                                else
+                                document.getElementById("slot105").src="../Images/user-present.png";
+                                document.getElementById("slot9").removeAttribute("onclick");
+                                document.getElementById("slot10").removeAttribute("onclick");
+                            });break;
+                            case 106:document.getElementById("slot106").setAttribute("title",slotdata[key].username);
+                            firebase.database().ref("user_register/"+slotdata[key].userkey).once("value",function(snapshot){
+                                var data=snapshot.val();
+                                if(data.image_url.length>2)
+                                document.getElementById("slot106").src=data.image_url;
+                                else
+                                document.getElementById("slot106").src="../Images/user-present.png";
+                                document.getElementById("slot11").removeAttribute("onclick");
+                                document.getElementById("slot12").removeAttribute("onclick");
+                            });break;
+                            case 107:document.getElementById("slot107").setAttribute("title",slotdata[key].username);
+                            firebase.database().ref("user_register/"+slotdata[key].userkey).once("value",function(snapshot){
+                                var data=snapshot.val();
+                                if(data.image_url.length>2)
+                                document.getElementById("slot107").src=data.image_url;
+                                else
+                                document.getElementById("slot107").src="../Images/user-present.png";
+                                document.getElementById("slot13").removeAttribute("onclick");
+                                document.getElementById("slot14").removeAttribute("onclick");
+                            });break;
+                            case 108:document.getElementById("slot108").setAttribute("title",slotdata[key].username);
+                            firebase.database().ref("user_register/"+slotdata[key].userkey).once("value",function(snapshot){
+                                var data=snapshot.val();
+                                if(data.image_url.length>2)
+                                document.getElementById("slot108").src=data.image_url;
+                                else
+                                document.getElementById("slot108").src="../Images/user-present.png";
+                                document.getElementById("slot15").removeAttribute("onclick");
+                                document.getElementById("slot16").removeAttribute("onclick");
+                            });break;
+                            //add level 3 23.09
+                            case 201:document.getElementById("slot201").setAttribute("title",slotdata[key].username);
+                            firebase.database().ref("user_register/"+slotdata[key].userkey).once("value",function(snapshot){
+                                var data=snapshot.val();
+                                if(data.image_url.length>2)
+                                document.getElementById("slot201").src=data.image_url;
+                                else
+                                document.getElementById("slot201").src="../Images/user-present.png";
+                                document.getElementById("slot101").removeAttribute("onclick");
+                                document.getElementById("slot102").removeAttribute("onclick");
+                            });break;
+                            case 202:document.getElementById("slot202").setAttribute("title",slotdata[key].username);
+                            firebase.database().ref("user_register/"+slotdata[key].userkey).once("value",function(snapshot){
+                                var data=snapshot.val();
+                                if(data.image_url.length>2)
+                                document.getElementById("slot202").src=data.image_url;
+                                else
+                                document.getElementById("slot202").src="../Images/user-present.png";
+                                document.getElementById("slot103").removeAttribute("onclick");
+                                document.getElementById("slot104").removeAttribute("onclick");
+                            });break;
+                            case 203:document.getElementById("slot203").setAttribute("title",slotdata[key].username);
+                            firebase.database().ref("user_register/"+slotdata[key].userkey).once("value",function(snapshot){
+                                var data=snapshot.val();
+                                if(data.image_url.length>2)
+                                document.getElementById("slot203").src=data.image_url;
+                                else
+                                document.getElementById("slot203").src="../Images/user-present.png";
+                                document.getElementById("slot105").removeAttribute("onclick");
+                                document.getElementById("slot106").removeAttribute("onclick");
+                            });break;
+                            case 204:document.getElementById("slot204").setAttribute("title",slotdata[key].username);
+                            firebase.database().ref("user_register/"+slotdata[key].userkey).once("value",function(snapshot){
+                                var data=snapshot.val();
+                                if(data.image_url.length>2)
+                                document.getElementById("slot204").src=data.image_url;
+                                else
+                                document.getElementById("slot204").src="../Images/user-present.png";
+                                document.getElementById("slot107").removeAttribute("onclick");
+                                document.getElementById("slot108").removeAttribute("onclick");
+                            });break;
+                            //add level 4 23.09
+                            case 301:document.getElementById("slot301").setAttribute("title",slotdata[key].username);
+                            firebase.database().ref("user_register/"+slotdata[key].userkey).once("value",function(snapshot){
+                                var data=snapshot.val();
+                                if(data.image_url.length>2)
+                                document.getElementById("slot301").src=data.image_url;
+                                else
+                                document.getElementById("slot301").src="../Images/user-present.png";
+                                document.getElementById("slot201").removeAttribute("onclick");
+                                document.getElementById("slot202").removeAttribute("onclick");
+                                //WINNER CODING FOR SLOT 301
+                                console.log("301: "+data.full_name);
+                                if(slotdata[key].status=="winner") 
+                                    {
+                                        alert("The winner is: "+slotdata[key].username);
+                                        document.getElementById("slot301").removeAttribute("onclick");
+                                        document.getElementById("slot302").removeAttribute("onclick");
+                                    }
+                            });break;
+                            case 302:document.getElementById("slot302").setAttribute("title",slotdata[key].username);
+                            firebase.database().ref("user_register/"+slotdata[key].userkey).once("value",function(snapshot){
+                                var data=snapshot.val();
+                                if(data.image_url.length>2)
+                                document.getElementById("slot302").src=data.image_url;
+                                else
+                                document.getElementById("slot302").src="../Images/user-present.png";
+                                document.getElementById("slot203").removeAttribute("onclick");
+                                document.getElementById("slot204").removeAttribute("onclick");
+                                //WINNER CODING FOR SLOT 302
+                                console.log("302: "+slotdata[key].status);
+                                if(slotdata[key].status=="winner") 
+                                    {
+                                        alert("The winner is: "+slotdata[key].username);
+                                        document.getElementById("slot301").removeAttribute("onclick");
+                                        document.getElementById("slot302").removeAttribute("onclick");
+                                    }
+                            });break;
+                            
+                        }
+                    }
+                });
+            }
+            function choosewinner(slotno){
+                if(confirm('Are You Sure?'))
+                switch(slotno){
+                    case 'slot1':if(document.getElementById(slotno).title.length>1)
+                    tournament_ref=firebase.database().ref("tournaments/"+document.getElementById('hiddenkey').value+"/bookedslots/") ;
+                tournament_ref.orderByChild("slotno").equalTo(1).once("value",function(slotsnapshot){
+                    var slotdata=slotsnapshot.val();
+                    for(key in slotdata)
+                    {
+                    tournament_ref.push({
+                            slotno:101,
+                            userid:slotdata[key].userid,
+                            username:slotdata[key].username,
+                            userkey:slotdata[key].userkey
+
+                        });
+                    }
+                        
+                });
+                                break;
+                    case 'slot2':if(document.getElementById(slotno).title.length>1) 
+                    tournament_ref=firebase.database().ref("tournaments/"+document.getElementById('hiddenkey').value+"/bookedslots/") ;
+                    tournament_ref.orderByChild("slotno").equalTo(2).once("value",function(slotsnapshot){
+                        var slotdata=slotsnapshot.val();
+                        for(key in slotdata)
+                        {
+                        tournament_ref.push({
+                                slotno:101,
+                                userid:slotdata[key].userid,
+                                username:slotdata[key].username,
+                                userkey:slotdata[key].userkey
+    
+                            });
+                        }
+                            
+                    });               
+                                 break;
+                    case 'slot3':if(document.getElementById(slotno).title.length>1)
+                    tournament_ref=firebase.database().ref("tournaments/"+document.getElementById('hiddenkey').value+"/bookedslots/") ;
+                    tournament_ref.orderByChild("slotno").equalTo(3).once("value",function(slotsnapshot){
+                        var slotdata=slotsnapshot.val();
+                        for(key in slotdata)
+                        {
+                        tournament_ref.push({
+                                slotno:102,
+                                userid:slotdata[key].userid,
+                                username:slotdata[key].username,
+                                userkey:slotdata[key].userkey
+    
+                            });
+                        }
+                            
+                    });
+                        break;
+                    case 'slot4':if(document.getElementById(slotno).title.length>1)
+                    tournament_ref=firebase.database().ref("tournaments/"+document.getElementById('hiddenkey').value+"/bookedslots/") ;
+                    tournament_ref.orderByChild("slotno").equalTo(4).once("value",function(slotsnapshot){
+                        var slotdata=slotsnapshot.val();
+                        for(key in slotdata)
+                        {
+                        tournament_ref.push({
+                                slotno:102,
+                                userid:slotdata[key].userid,
+                                username:slotdata[key].username,
+                                userkey:slotdata[key].userkey
+    
+                            });
+                        }
+                            
+                    });
+                        break;
+                    case 'slot5':if(document.getElementById(slotno).title.length>1)
+                    tournament_ref=firebase.database().ref("tournaments/"+document.getElementById('hiddenkey').value+"/bookedslots/") ;
+                    tournament_ref.orderByChild("slotno").equalTo(5).once("value",function(slotsnapshot){
+                        var slotdata=slotsnapshot.val();
+                        for(key in slotdata)
+                        {
+                        tournament_ref.push({
+                                slotno:103,
+                                userid:slotdata[key].userid,
+                                username:slotdata[key].username,
+                                userkey:slotdata[key].userkey
+    
+                            });
+                        }
+                            
+                    });
+                        break;
+                    case 'slot6':if(document.getElementById(slotno).title.length>1)
+                    tournament_ref=firebase.database().ref("tournaments/"+document.getElementById('hiddenkey').value+"/bookedslots/") ;
+                    tournament_ref.orderByChild("slotno").equalTo(6).once("value",function(slotsnapshot){
+                        var slotdata=slotsnapshot.val();
+                        for(key in slotdata)
+                        {
+                        tournament_ref.push({
+                                slotno:103,
+                                userid:slotdata[key].userid,
+                                username:slotdata[key].username,
+                                userkey:slotdata[key].userkey
+    
+                            });
+                        }
+                            
+                    });
+                        break;
+                    case 'slot7':if(document.getElementById(slotno).title.length>1)
+                    tournament_ref=firebase.database().ref("tournaments/"+document.getElementById('hiddenkey').value+"/bookedslots/") ;
+                    tournament_ref.orderByChild("slotno").equalTo(7).once("value",function(slotsnapshot){
+                        var slotdata=slotsnapshot.val();
+                        for(key in slotdata)
+                        {
+                        tournament_ref.push({
+                                slotno:104,
+                                userid:slotdata[key].userid,
+                                username:slotdata[key].username,
+                                userkey:slotdata[key].userkey
+    
+                            });
+                        }
+                            
+                    });
+                        break;
+                    case 'slot8':if(document.getElementById(slotno).title.length>1)
+                    tournament_ref=firebase.database().ref("tournaments/"+document.getElementById('hiddenkey').value+"/bookedslots/") ;
+                    tournament_ref.orderByChild("slotno").equalTo(8).once("value",function(slotsnapshot){
+                        var slotdata=slotsnapshot.val();
+                        for(key in slotdata)
+                        {
+                        tournament_ref.push({
+                                slotno:104,
+                                userid:slotdata[key].userid,
+                                username:slotdata[key].username,
+                                userkey:slotdata[key].userkey
+    
+                            });
+                        }
+                            
+                    });
+                        break;
+                    case 'slot9':if(document.getElementById(slotno).title.length>1)
+                    tournament_ref=firebase.database().ref("tournaments/"+document.getElementById('hiddenkey').value+"/bookedslots/") ;
+                    tournament_ref.orderByChild("slotno").equalTo(9).once("value",function(slotsnapshot){
+                        var slotdata=slotsnapshot.val();
+                        for(key in slotdata)
+                        {
+                        tournament_ref.push({
+                                slotno:105,
+                                userid:slotdata[key].userid,
+                                username:slotdata[key].username,
+                                userkey:slotdata[key].userkey
+    
+                            });
+                        }
+                            
+                    });
+                        break;
+                    case 'slot10':if(document.getElementById(slotno).title.length>1)
+                    tournament_ref=firebase.database().ref("tournaments/"+document.getElementById('hiddenkey').value+"/bookedslots/") ;
+                    tournament_ref.orderByChild("slotno").equalTo(10).once("value",function(slotsnapshot){
+                        var slotdata=slotsnapshot.val();
+                        for(key in slotdata)
+                        {
+                        tournament_ref.push({
+                                slotno:105,
+                                userid:slotdata[key].userid,
+                                username:slotdata[key].username,
+                                userkey:slotdata[key].userkey
+    
+                            });
+                        }
+                            
+                    });
+                        break;
+                    case 'slot11':if(document.getElementById(slotno).title.length>1)
+                    tournament_ref=firebase.database().ref("tournaments/"+document.getElementById('hiddenkey').value+"/bookedslots/") ;
+                    tournament_ref.orderByChild("slotno").equalTo(11).once("value",function(slotsnapshot){
+                        var slotdata=slotsnapshot.val();
+                        for(key in slotdata)
+                        {
+                        tournament_ref.push({
+                                slotno:106,
+                                userid:slotdata[key].userid,
+                                username:slotdata[key].username,
+                                userkey:slotdata[key].userkey
+    
+                            });
+                        }
+                            
+                    });
+                        break;
+                    case 'slot12':if(document.getElementById(slotno).title.length>1)
+                    tournament_ref=firebase.database().ref("tournaments/"+document.getElementById('hiddenkey').value+"/bookedslots/") ;
+                    tournament_ref.orderByChild("slotno").equalTo(12).once("value",function(slotsnapshot){
+                        var slotdata=slotsnapshot.val();
+                        for(key in slotdata)
+                        {
+                        tournament_ref.push({
+                                slotno:106,
+                                userid:slotdata[key].userid,
+                                username:slotdata[key].username,
+                                userkey:slotdata[key].userkey
+    
+                            });
+                        }
+                            
+                    });
+                        break;
+                    case 'slot13':if(document.getElementById(slotno).title.length>1)
+                    tournament_ref=firebase.database().ref("tournaments/"+document.getElementById('hiddenkey').value+"/bookedslots/") ;
+                    tournament_ref.orderByChild("slotno").equalTo(13).once("value",function(slotsnapshot){
+                        var slotdata=slotsnapshot.val();
+                        for(key in slotdata)
+                        {
+                        tournament_ref.push({
+                                slotno:107,
+                                userid:slotdata[key].userid,
+                                username:slotdata[key].username,
+                                userkey:slotdata[key].userkey
+    
+                            });
+                        }
+                            
+                    });
+                        break;
+                    case 'slot14':if(document.getElementById(slotno).title.length>1)
+                    tournament_ref=firebase.database().ref("tournaments/"+document.getElementById('hiddenkey').value+"/bookedslots/") ;
+                    tournament_ref.orderByChild("slotno").equalTo(14).once("value",function(slotsnapshot){
+                        var slotdata=slotsnapshot.val();
+                        for(key in slotdata)
+                        {
+                        tournament_ref.push({
+                                slotno:107,
+                                userid:slotdata[key].userid,
+                                username:slotdata[key].username,
+                                userkey:slotdata[key].userkey
+    
+                            });
+                        }
+                            
+                    });
+                        break;
+                    case 'slot15':if(document.getElementById(slotno).title.length>1)
+                    tournament_ref=firebase.database().ref("tournaments/"+document.getElementById('hiddenkey').value+"/bookedslots/") ;
+                    tournament_ref.orderByChild("slotno").equalTo(15).once("value",function(slotsnapshot){
+                        var slotdata=slotsnapshot.val();
+                        for(key in slotdata)
+                        {
+                        tournament_ref.push({
+                                slotno:108,
+                                userid:slotdata[key].userid,
+                                username:slotdata[key].username,
+                                userkey:slotdata[key].userkey
+    
+                            });
+                        }
+                            
+                    });
+                        break;
+                    case 'slot16':if(document.getElementById(slotno).title.length>1)
+                    tournament_ref=firebase.database().ref("tournaments/"+document.getElementById('hiddenkey').value+"/bookedslots/") ;
+                    tournament_ref.orderByChild("slotno").equalTo(16).once("value",function(slotsnapshot){
+                        var slotdata=slotsnapshot.val();
+                        for(key in slotdata)
+                        {
+                        tournament_ref.push({
+                                slotno:108,
+                                userid:slotdata[key].userid,
+                                username:slotdata[key].username,
+                                userkey:slotdata[key].userkey
+    
+                            });
+                        }
+                            
+                    });
+                        break;
+                    case 'slot17':if(document.getElementById(slotno).title.length>1)
+                                 alert(slotno);break;
+                    case 'slot18':if(document.getElementById(slotno).title.length>1)
+                                 alert(slotno);break;
+                    case 'slot19':if(document.getElementById(slotno).title.length>1)
+                                 alert(slotno);break;
+                    case 'slot20':if(document.getElementById(slotno).title.length>1)
+                                 alert(slotno);break;
+                    case 'slot101':if(document.getElementById(slotno).title.length>1)
+                    tournament_ref=firebase.database().ref("tournaments/"+document.getElementById('hiddenkey').value+"/bookedslots/") ;
+                    tournament_ref.orderByChild("slotno").equalTo(101).once("value",function(slotsnapshot){
+                        var slotdata=slotsnapshot.val();
+                        for(key in slotdata)
+                        {
+                        tournament_ref.push({
+                                slotno:201,
+                                userid:slotdata[key].userid,
+                                username:slotdata[key].username,
+                                userkey:slotdata[key].userkey
+    
+                            });
+                        }
+                            
+                    });break;
+                    case 'slot102':if(document.getElementById(slotno).title.length>1)
+                    tournament_ref=firebase.database().ref("tournaments/"+document.getElementById('hiddenkey').value+"/bookedslots/") ;
+                    tournament_ref.orderByChild("slotno").equalTo(102).once("value",function(slotsnapshot){
+                        var slotdata=slotsnapshot.val();
+                        for(key in slotdata)
+                        {
+                        tournament_ref.push({
+                                slotno:201,
+                                userid:slotdata[key].userid,
+                                username:slotdata[key].username,
+                                userkey:slotdata[key].userkey
+    
+                            });
+                        }
+                            
+                    });
+                    break;
+                    case 'slot103':if(document.getElementById(slotno).title.length>1)
+                    tournament_ref=firebase.database().ref("tournaments/"+document.getElementById('hiddenkey').value+"/bookedslots/") ;
+                    tournament_ref.orderByChild("slotno").equalTo(103).once("value",function(slotsnapshot){
+                        var slotdata=slotsnapshot.val();
+                        for(key in slotdata)
+                        {
+                        tournament_ref.push({
+                                slotno:202,
+                                userid:slotdata[key].userid,
+                                username:slotdata[key].username,
+                                userkey:slotdata[key].userkey
+    
+                            });
+                        }
+                            
+                    });
+                    break;
+                    case 'slot104':if(document.getElementById(slotno).title.length>1)
+                    tournament_ref=firebase.database().ref("tournaments/"+document.getElementById('hiddenkey').value+"/bookedslots/") ;
+                    tournament_ref.orderByChild("slotno").equalTo(104).once("value",function(slotsnapshot){
+                        var slotdata=slotsnapshot.val();
+                        for(key in slotdata)
+                        {
+                        tournament_ref.push({
+                                slotno:202,
+                                userid:slotdata[key].userid,
+                                username:slotdata[key].username,
+                                userkey:slotdata[key].userkey
+    
+                            });
+                        }
+                            
+                    });
+                    break;
+                    case 'slot105':if(document.getElementById(slotno).title.length>1)
+                    tournament_ref=firebase.database().ref("tournaments/"+document.getElementById('hiddenkey').value+"/bookedslots/") ;
+                    tournament_ref.orderByChild("slotno").equalTo(105).once("value",function(slotsnapshot){
+                        var slotdata=slotsnapshot.val();
+                        for(key in slotdata)
+                        {
+                        tournament_ref.push({
+                                slotno:203,
+                                userid:slotdata[key].userid,
+                                username:slotdata[key].username,
+                                userkey:slotdata[key].userkey
+    
+                            });
+                        }
+                            
+                    });
+                    break;
+                    case 'slot106':if(document.getElementById(slotno).title.length>1)
+                    tournament_ref=firebase.database().ref("tournaments/"+document.getElementById('hiddenkey').value+"/bookedslots/") ;
+                    tournament_ref.orderByChild("slotno").equalTo(106).once("value",function(slotsnapshot){
+                        var slotdata=slotsnapshot.val();
+                        for(key in slotdata)
+                        {
+                        tournament_ref.push({
+                                slotno:203,
+                                userid:slotdata[key].userid,
+                                username:slotdata[key].username,
+                                userkey:slotdata[key].userkey
+    
+                            });
+                        }
+                            
+                    });
+                    break;
+                    case 'slot107':if(document.getElementById(slotno).title.length>1)
+                    tournament_ref=firebase.database().ref("tournaments/"+document.getElementById('hiddenkey').value+"/bookedslots/") ;
+                    tournament_ref.orderByChild("slotno").equalTo(107).once("value",function(slotsnapshot){
+                        var slotdata=slotsnapshot.val();
+                        for(key in slotdata)
+                        {
+                        tournament_ref.push({
+                                slotno:204,
+                                userid:slotdata[key].userid,
+                                username:slotdata[key].username,
+                                userkey:slotdata[key].userkey
+    
+                            });
+                        }
+                            
+                    });
+                    break;
+                    case 'slot108':if(document.getElementById(slotno).title.length>1)
+                    tournament_ref=firebase.database().ref("tournaments/"+document.getElementById('hiddenkey').value+"/bookedslots/") ;
+                    tournament_ref.orderByChild("slotno").equalTo(108).once("value",function(slotsnapshot){
+                        var slotdata=slotsnapshot.val();
+                        for(key in slotdata)
+                        {
+                        tournament_ref.push({
+                                slotno:204,
+                                userid:slotdata[key].userid,
+                                username:slotdata[key].username,
+                                userkey:slotdata[key].userkey
+    
+                            });
+                        }
+                            
+                    });
+                    break;
+                    case 'slot201':if(document.getElementById(slotno).title.length>1)
+                    tournament_ref=firebase.database().ref("tournaments/"+document.getElementById('hiddenkey').value+"/bookedslots/") ;
+                    tournament_ref.orderByChild("slotno").equalTo(201).once("value",function(slotsnapshot){
+                        var slotdata=slotsnapshot.val();
+                        for(key in slotdata)
+                        {
+                        tournament_ref.push({
+                                slotno:301,
+                                userid:slotdata[key].userid,
+                                username:slotdata[key].username,
+                                userkey:slotdata[key].userkey
+    
+                            });
+                        }
+                            
+                    });
+                    break;
+                    case 'slot202':if(document.getElementById(slotno).title.length>1)
+                    tournament_ref=firebase.database().ref("tournaments/"+document.getElementById('hiddenkey').value+"/bookedslots/") ;
+                    tournament_ref.orderByChild("slotno").equalTo(202).once("value",function(slotsnapshot){
+                        var slotdata=slotsnapshot.val();
+                        for(key in slotdata)
+                        {
+                        tournament_ref.push({
+                                slotno:301,
+                                userid:slotdata[key].userid,
+                                username:slotdata[key].username,
+                                userkey:slotdata[key].userkey
+    
+                            });
+                        }
+                            
+                    });
+                    break;
+                    case 'slot203':if(document.getElementById(slotno).title.length>1)
+                    tournament_ref=firebase.database().ref("tournaments/"+document.getElementById('hiddenkey').value+"/bookedslots/") ;
+                    tournament_ref.orderByChild("slotno").equalTo(203).once("value",function(slotsnapshot){
+                        var slotdata=slotsnapshot.val();
+                        for(key in slotdata)
+                        {
+                        tournament_ref.push({
+                                slotno:302,
+                                userid:slotdata[key].userid,
+                                username:slotdata[key].username,
+                                userkey:slotdata[key].userkey
+    
+                            });
+                        }
+                            
+                    });
+                    break;
+                    case 'slot204':if(document.getElementById(slotno).title.length>1)
+                    tournament_ref=firebase.database().ref("tournaments/"+document.getElementById('hiddenkey').value+"/bookedslots/") ;
+                    tournament_ref.orderByChild("slotno").equalTo(204).once("value",function(slotsnapshot){
+                        var slotdata=slotsnapshot.val();
+                        for(key in slotdata)
+                        {
+                        tournament_ref.push({
+                                slotno:302,
+                                userid:slotdata[key].userid,
+                                username:slotdata[key].username,
+                                userkey:slotdata[key].userkey
+    
+                            });
+                        }
+                            
+                    });
+                    break;
+                    case 'slot301':   tournament_ref=firebase.database().ref("tournaments/"+document.getElementById('hiddenkey').value+"/bookedslots/") ;
+                    tournament_ref.orderByChild("slotno").equalTo(301).once("value",function(slotsnapshot){
+                        var slotdata=slotsnapshot.val();
+                        for(key in slotdata)
+                        {
+                        tournament_ref.child(key).update({
+                                status:"winner"
+    
+                            });
+                        }
+                            
+                    });
+                 
+                            break;
+                    case 'slot302':tournament_ref=firebase.database().ref("tournaments/"+document.getElementById('hiddenkey').value+"/bookedslots/") ;
+                    tournament_ref.orderByChild("slotno").equalTo(302).once("value",function(slotsnapshot){
+                        var slotdata=slotsnapshot.val();
+                        for(key in slotdata)
+                        {
+                        tournament_ref.child(key).update({
+                                status:"winner"
+    
+                            });
+                        }
+                            
+                    });
+                    break;
+                    
+                    
+                }
+            } 
+            function setvisibility(){
+                var key=document.getElementById('hiddenkey').value;
+                var ref = new Firebase("https://ballpool-d1979.firebaseio.com/tournaments/");
+                ref.child(key).once("value",function(snapshot){
+                    
+                   if(!snapshot.val().visible)
+                        ref.child(key).update({
+                            visible:true
+                        });
+                    else  
+                    ref.child(key).update({
+                            visible:false
+                        });
+                });
+           
+            }
+
+</script>
+
+</body>
+
+</html>

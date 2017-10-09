@@ -1,0 +1,197 @@
+
+
+    <script>
+        $(document).ready(function() {
+
+            //document.getElementById("login_link").setAttribute("href", base_url + "/login.html");
+            document.getElementById("home_link").setAttribute("href", base_url + "/index.html");
+
+
+
+            if (getPageName(window.location.href) == "" || getPageName(window.location.href) == "index") {
+                document.getElementById("home_link").style.display = 'none';;
+            }
+
+            if (getPageName(window.location.href) == "login") {
+                document.getElementById("login_link").style.display = 'none';;
+            }
+
+        });
+
+
+        function signin_user() {
+            var email = document.getElementById("login_email").value;
+            var password = document.getElementById("login_password").value;
+            firebase.auth().signInWithEmailAndPassword(email, password).then(function () {
+                ;
+
+                var user = firebase.auth().currentUser;
+
+                // $.urlParam = function (name) {
+                //     var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+                //     if (results == null) {
+                //         return null;
+                //     }
+                //     else {
+                //         return decodeURI(results[1]) || 0;
+                //     }
+                // }
+				if(email=="admin@gmail.com")
+					window.location = "admin/index.html"
+					else{
+                var tournament_key = $.urlParam('tournament_key');
+
+                if (tournament_key != null) {
+                    window.location = "User/interest.html?tournament_key=" + tournament_key;
+                }
+                else {
+                    window.location = "User/dashboard.html"
+                }
+				}
+            }).catch(function (error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                alert(errorMessage);
+                // ...
+            });
+
+        }
+
+        //$.urlParam = function (name) {
+            //var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+            //if (results == null) {
+               // return null;
+            //}
+           // else {
+                //return decodeURI(results[1]) || 0;
+           // }
+       // }
+
+        function register_user() {
+            var fullname = document.getElementById("fullname").value;
+            var email = document.getElementById("register_email").value;
+            var mobile = document.getElementById("mobile").value;
+            var password = document.getElementById("register_password").value;
+
+
+             firebase.auth().createUserWithEmailAndPassword(email, password)
+                 .then(function (firebaseUser) {
+                    userdata_insert(firebaseUser.uid, fullname, mobile, location);
+
+                    var tournament_key = $.urlParam('tournament_key');
+
+                    if (tournament_key != null) {
+                        window.location = "User/interest.html?tournament_key=" + tournament_key;
+                    }
+                    else {
+                        window.location = "User/dashboard.html"
+                    }
+                  })
+
+
+                .catch(function (error) {
+
+                    // Handle Errors here.s
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    alert(errorCode + ":" + errorMessage);
+                    // ...
+                });
+
+        }
+
+        function userdata_insert(url_uid, url_fullname, url_mobile, url_location) {
+            // insert data to firebase database
+            var ref = firebase.database().ref("user_register/");
+            ref.push({
+                Uid: url_uid,
+                Full_Name: url_fullname,
+                Mobile: url_mobile,
+
+            });
+        }
+    </script>
+	<div class="modal fade" id="readmore" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title text-left">LOGO</h4>
+					</div>
+					<div class="modal-body text-center">
+						<div class="col-md-6">
+							<div class="modal-header">
+								<h4 class="modal-title">LOGIN</h4>
+							</div>
+							<div class="agileits_signin_form">
+									<input id="login_email" type="email" name="email" placeholder="Email" required="">
+									<input id="login_password" type="password" name="password" placeholder="Password" required="">
+									<input type="submit" value="LOGIN" onclick="signin_user()">
+
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="modal-header">
+								<h4 class="modal-title">SIGN UP</h4>
+							</div>
+							<div class="agileits_signin_form">
+									<input id="fullname" type="text" name="name" placeholder="Full Name" required="">
+									<input id="register_email" type="email" name="email" placeholder="Email" required="">
+									<input id="mobile" type="text" name="tel" placeholder="Mobile" required="">
+									<input id="register_password" type="password" name="password" placeholder="Password" required="">
+									<input id="confirm_password" type="password" name="password" placeholder="Confirm Password" required="">
+									<input type="submit" value="REGISTER" onclick="register_user()" >
+
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="modal-footer">
+						<div class="w3agile_social_icons">
+							<ul>
+								<li class="wthree_follow">Or Sign Up with :</li>
+								<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+								<li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!-- //modal-content -->
+			</div>
+			<!-- //modal-dialog -->
+		</div>
+		<!-- //modal -->
+<header id="navbar" class="nav-down">
+
+  <div id="myNav" class="overlay">
+    <div id="trigger-overlay" class="navigation-burger-container active" onclick="closeNav()">
+      <div class="navigation-burger"></div>
+    </div>
+  <div class="overlay-content">
+    <a href="#">About</a>
+    <a href="#">Clients</a>
+    <a href="#">Contact</a>
+
+  </div>
+</div>
+<div id="trigger-overlay" class="navigation-burger-container" onclick="openNav()">
+  <div class="navigation-burger"></div>
+</div>
+
+            <a href="../index.html">
+                <div class="logo">
+                    <h1>8 BALL POOL</h1>
+                </div>
+            </a>
+            <ul id="navMenu">
+                <li id="home">
+                    <a id="home_link" href="#readmore" class="link-w3l1" data-toggle="modal">Home</a>
+                </li>
+                <li id="logIn">
+                    <a id="login_link" href="#readmore" class="link-w3l1" data-toggle="modal">Login</a>
+                </li>
+
+
+            </ul>
+        </header>

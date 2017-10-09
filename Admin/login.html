@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html >
+<head>
+   <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+ <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  <script src="js/login.js"></script>
+  <meta charset="UTF-8">
+  <title>Admin Panel-8BallPool</title>
+      <link rel="stylesheet" href="css/login_style.css">
+
+</head>
+
+<body>
+  <hgroup>
+
+  <img src="images/logo.png" height= "150";/>
+</hgroup>
+<form>
+  <div class="group">
+    <input type="email" id="login_email"><span class="highlight"></span><span class="bar"></span>
+    <label>Email</label>
+  </div>
+  <div class="group">
+    <input type="password" id="login_password"><span class="highlight"></span><span class="bar"></span>
+    <label>Password</label>
+  </div>
+  <button type="button" class="button buttonBlue" onclick="signin_user()">LOGIN
+    <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+  </button>
+</form>
+
+  <footer class="footer text-center">© 2017 8 Ball Pool . All Rights Reserved | Powered by <a href="http://cdtfx.com/">CDTFX</a></footer>
+
+<script>
+   var config = {
+              apiKey: "AIzaSyBufoTjjlnhdpjUfGY_TRM7pqhE4ZNvir4",
+              authDomain: "ballpool-d1979.firebaseapp.com",
+              databaseURL: "https://ballpool-d1979.firebaseio.com",
+              projectId: "ballpool-d1979",
+              storageBucket: "ballpool-d1979.appspot.com",
+              messagingSenderId: "116075324547"
+            };
+            firebase.initializeApp(config);
+  function signin_user() {
+
+            var email = document.getElementById("login_email").value;
+
+            var password = document.getElementById("login_password").value;
+            if(email=='admin@gmail.com')
+            firebase.auth().signInWithEmailAndPassword(email, password).then(function () {
+
+                var user = firebase.auth().currentUser;
+
+                // $.urlParam = function (name) {
+                //     var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+                //     if (results == null) {
+                //         return null;
+                //     }
+                //     else {
+                //         return decodeURI(results[1]) || 0;
+                //     }
+                // }
+                //var tournament_key = $.urlParam('tournament_key');
+
+
+                    window.location.href = "index.html"
+
+            }).catch(function (error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                alert(errorMessage);
+                // ...
+            });
+            else
+            alert("Admin Access only!");
+        }
+   function login() {
+
+              var email=document.getElementById("email").value;
+              var pwd=document.getElementById("password").value;
+                if(email=="" & pwd==""){
+                    alert("fill blank field");
+                }else{
+
+                    firebase.database().ref('tournaments/' + ck).update({
+                        tournament_name: tournament_name,
+                        location:location,
+                        tournament_datetime: tournament_datetime
+                    });
+
+                    window.location="tournamentview.html";
+                }
+            }
+
+      </script>
+
+</body>
+</html>
